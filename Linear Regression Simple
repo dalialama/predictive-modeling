@@ -1,0 +1,48 @@
+
+# simple linear regression: http://www.r-bloggers.com/r-tutorial-series-simple-linear-regression/
+# Dataset used: http://dl.dropbox.com/u/10246536/Web/RTutorialSeries/dataset_simpleRegression.csv
+# This dataset contains information used to estimate undergraduate enrollment at the University of New Mexico (Office of Institutional Research, 1990). 
+setwd("~/Documents/DataSets")
+Enroll <- read.csv("dataset_simpleRegression.csv")
+summary(Enroll)
+str(Enroll)
+
+# attach data varialbe
+attach(Enroll)
+
+# display all data
+Enroll
+
+# create a basic linear model using the following:
+lm(formula(Enroll))
+
+# 'formula' describes the model.
+# For simple linear regression, this is “YVAR ~ XVAR” where YVAR is the dependent, or predicted, variable and XVAR is the independent, or predictor, variable.
+# 'data' the variable that contains the dataset in thhis case 'Enroll'
+
+# create linear model using lm(FORMULA, DATAVAR) predicting the fall of enrollment (ROLL)
+# using the unemployment rate variable (UNEM)
+Call:
+  lm(formula = ROLL ~ UNEM, data = Enroll)
+
+# Gives me the following intercept (3957) and the coefficient for the unemployment rate is 1134:
+#  (Intercept)     UNEM  
+#     3957         1134 
+# Therefore, the complete regression equation is Fall Enrollment = 3957 + 1134 * Unemployment Rate.
+# This equation tells us that the predicted fall enrollment for the UNM
+# will increase by 1134 students for every one percent increase in the unemployment rate. 
+
+# Predict a fall in enrollment
+# Suppose that our research question asks what the expected fall enrollment is, given this year’s unemployment rate of 9%. 
+Fall <- 3957 + 1134*9
+Fall
+#the predicted fall enrollment, given a 9% unemployment rate, is 14,163 students.
+
+# Summarising the Model
+# Here, the summary(OBJECT) function is a useful tool. It is capable of generating most of the statistical information that one would need to derive from a linear model. The example below demonstrates the use of the summary function on a linear model variable.
+Call:
+  summary(lm(formula = ROLL ~ UNEM, data = Enroll))
+
+# the summary function provides us with t-test, F-test, R-squared, residual, and significance values.
+
+# Alternative modeling functions from lm() include glm() and rlm().
